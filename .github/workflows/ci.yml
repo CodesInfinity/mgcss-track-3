@@ -1,0 +1,29 @@
+name: CI Pipeline
+
+# Se ejecuta al hacer push o al abrir un Pull Request hacia la rama main
+on:
+  push:
+    branches: [ "main", "feature/**" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout: Clona el repositorio en la máquina virtual
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2. Setup-Java: Prepara el entorno con Java 17
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven' # Esto acelera las compilaciones futuras
+
+    # 3 y 4. Build y Test: Ejecuta la validación estricta de Maven
+    - name: Build and Test with Maven
+      run: mvn clean verify
