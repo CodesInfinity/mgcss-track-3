@@ -27,3 +27,14 @@ jobs:
     # 3 y 4. Build y Test: Ejecuta la validación estricta de Maven
     - name: Build and Test with Maven
       run: mvn clean verify
+
+   # 4. Build, Test y Análisis con SonarCloud
+    - name: Build, Test and Analyze
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      # El símbolo '>' permite escribir el comando en varias líneas para que sea más legible
+      run: >
+        mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        -Dsonar.projectKey=CodesInfinity_mgcss-track-3
+        -Dsonar.organization=codesinfinity
+        -Dsonar.host.url=https://sonarcloud.io
