@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import com.mgcss.domain.Solicitud;
 import com.mgcss.domain.Tecnico;
 
-class NoAsignarTecnicosNoActivosASolicitudes {
+class NoAsignarTecnicosNoActivosASolicitudesTest {
 
 	@Test
 	void test() {

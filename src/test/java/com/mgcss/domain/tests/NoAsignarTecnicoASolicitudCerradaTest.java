@@ -5,19 +5,21 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import com.mgcss.domain.Solicitud;
+import com.mgcss.domain.Tecnico;
 import com.mgcss.domain.Enums.Estado;
 
-class NoCerrarSolicitudSiNoEnProceso {
+class NoAsignarTecnicoASolicitudCerradaTest {
 
 	@Test
 	void test() {
 		Solicitud solicitud = new Solicitud();
+		Tecnico tecnico = Tecnico.crearTecnico("Juan", "Software");
 		
-		solicitud.setEstado(Estado.EN_PROCESO);
+		solicitud.setEstado(Estado.CERRADA);
 		
-		solicitud.cerrar();
+		solicitud.asignarTecnico(tecnico);
 		
-		assertEquals(Estado.CERRADA, solicitud.getEstado());
+		assertEquals(null, solicitud.getTecnico());
 	}
 
 }

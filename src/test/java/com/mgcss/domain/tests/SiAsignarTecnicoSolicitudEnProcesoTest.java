@@ -8,7 +8,7 @@ import com.mgcss.domain.Solicitud;
 import com.mgcss.domain.Tecnico;
 import com.mgcss.domain.Enums.Estado;
 
-class SiAsignarTecnicoSolicitudEnProceso {
+class SiAsignarTecnicoSolicitudEnProcesoTest {
 
 	@Test
 	void test() {
