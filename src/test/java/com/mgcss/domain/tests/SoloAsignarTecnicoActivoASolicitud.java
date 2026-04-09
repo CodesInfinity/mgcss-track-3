@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import com.mgcss.domain.Solicitud;
 import com.mgcss.domain.Tecnico;
 
-class solo_asignar_tecnico_activo_a_solicitud {
+class SoloAsignarTecnicoActivoASolicitud {
 
 	@Test
 	void test() {

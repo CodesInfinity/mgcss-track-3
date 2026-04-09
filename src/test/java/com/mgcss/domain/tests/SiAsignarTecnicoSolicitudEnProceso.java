@@ -8,18 +8,17 @@ import com.mgcss.domain.Solicitud;
 import com.mgcss.domain.Tecnico;
 import com.mgcss.domain.Enums.Estado;
 
-class no_asignar_tecnico_a_solicitud_cerrada {
+class SiAsignarTecnicoSolicitudEnProceso {
 
 	@Test
 	void test() {
 		Solicitud solicitud = new Solicitud();
 		Tecnico tecnico = Tecnico.crearTecnico("Juan", "Software");
 		
-		solicitud.setEstado(Estado.CERRADA);
-		
 		solicitud.asignarTecnico(tecnico);
 		
-		assertEquals(null, solicitud.getTecnico());
+		assertEquals(Estado.EN_PROCESO, solicitud.getEstado());
+		
 	}
 
 }

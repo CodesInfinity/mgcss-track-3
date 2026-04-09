@@ -8,6 +8,8 @@ public class Tecnico {
 	private String especialidad;
 	private boolean activo;
 	
+	private static Random random = new Random();
+	
 	public Long getId() {
 		return id;
 	}
@@ -42,7 +44,7 @@ public class Tecnico {
 
 	public static Tecnico crearTecnico(String nombre, String especialidad) {
 		Tecnico tec = new Tecnico();
-		tec.id = new Random().nextLong();
+		tec.id = random.nextLong();
 		tec.nombre = nombre;
 		tec.especialidad = especialidad;
 		tec.activo = true;
@@ -52,7 +54,7 @@ public class Tecnico {
 	
 	public static Tecnico crearTecnico(String nombre) {
 		Tecnico tec = new Tecnico();
-		tec.id = new Random().nextLong();
+		tec.id = random.nextLong();
 		tec.nombre = nombre;
 		tec.activo = false;
 		

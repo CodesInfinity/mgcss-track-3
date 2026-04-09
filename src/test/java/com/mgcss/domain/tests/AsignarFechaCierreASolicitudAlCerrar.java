@@ -7,9 +7,7 @@ import org.junit.jupiter.api.Test;
 import com.mgcss.domain.Solicitud;
 import com.mgcss.domain.Tecnico;
 
-import java.util.Date;
-
-class asignar_fechaCierre_a_Solicitud_al_cerrar {
+class AsignarFechaCierreASolicitudAlCerrar {
 
 	@Test
 	void test() {
