@@ -1,6 +1,6 @@
 package com.mgcss.domain;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class Tecnico {
 	private Long id;
@@ -8,7 +8,7 @@ public class Tecnico {
 	private String especialidad;
 	private boolean activo;
 	
-	private static Random random = new Random();
+	private static SecureRandom random = new SecureRandom();
 	
 	public Long getId() {
 		return id;
@@ -65,8 +65,4 @@ public class Tecnico {
 			this.activo=true;
 		}
 	}
-	public void desactivarTecnico() {
-		this.activo = false;
-	}
-	public void listarTecnico() {}
 }

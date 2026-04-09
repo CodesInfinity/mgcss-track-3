@@ -1,7 +1,7 @@
 package com.mgcss.domain;
 
+import java.security.SecureRandom;
 import java.util.Date;
-import java.util.Random;
 
 import com.mgcss.domain.Enums.Estado;
 
@@ -15,9 +15,11 @@ public class Solicitud {
 	private Tecnico tecnico;
 	private Date fechaCierre;
 	
+	private static SecureRandom random = new SecureRandom();
+	
 	public Solicitud()
 	{
-		this.id = new Random().nextLong();
+		this.id = random.nextLong();
 		this.estado = Estado.ABIERTA;
 	}
 	
