@@ -6,9 +6,9 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import com.mgcss.domain.Solicitud;
+import com.mgcss.domain.Solicitud.Solicitud;
 import com.mgcss.domain.Enums.Estado;
-import com.mgcss.domain.Cliente;
+import com.mgcss.domain.Cliente.Cliente;
 
 class GetterYSetterSolicitudTest {
 
