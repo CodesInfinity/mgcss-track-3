@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.mgcss.domain.Cliente;
-import com.mgcss.domain.Solicitud;
+import com.mgcss.domain.Cliente.Cliente;
+import com.mgcss.domain.Solicitud.Solicitud;
 import com.mgcss.domain.Enums.TipoCliente;
 
 class AsignaClienteASolicitudTest {

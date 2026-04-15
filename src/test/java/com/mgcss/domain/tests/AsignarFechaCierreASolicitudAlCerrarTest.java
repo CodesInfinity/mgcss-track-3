@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.mgcss.domain.Solicitud;
-import com.mgcss.domain.Tecnico;
+import com.mgcss.domain.Solicitud.Solicitud;
+import com.mgcss.domain.Tecnico.Tecnico;
 
 class AsignarFechaCierreASolicitudAlCerrarTest {
 

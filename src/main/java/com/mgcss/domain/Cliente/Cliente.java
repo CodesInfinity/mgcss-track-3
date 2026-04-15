@@ -1,4 +1,4 @@
-package com.mgcss.domain;
+package com.mgcss.domain.Cliente;
 
 import java.util.Random;
 
