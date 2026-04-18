@@ -3,7 +3,7 @@ package com.mgcss.service;
 import com.mgcss.domain.Enums.Estado;
 import com.mgcss.domain.Solicitud.Solicitud;
 import com.mgcss.domain.Tecnico.Tecnico;
-import com.mgcss.infraestructure.SolicitudRepository;
+import com.mgcss.infrastructure.SolicitudRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
