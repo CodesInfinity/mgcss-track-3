@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.mgcss.domain.Enums.Estado;
 import com.mgcss.domain.Solicitud.Solicitud;
 import com.mgcss.domain.Tecnico.Tecnico;
-import com.mgcss.infraestructure.SolicitudRepository;
+import com.mgcss.infrastructure.SolicitudRepository;
 import com.mgcss.service.SolicitudService;
 
 @ExtendWith(MockitoExtension.class)
