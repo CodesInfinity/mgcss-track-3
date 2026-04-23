@@ -1,4 +1,4 @@
-package com.mgcss.infraestructure; 
+package com.mgcss.infrastructure; 
 
 import java.util.Optional;
 
