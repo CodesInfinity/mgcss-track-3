@@ -2,7 +2,8 @@ package com.mgcss.infrastructure.persistence;
 
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
-import com.mgcss.domain.Solicitud.Solicitud;
+
+import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.infrastructure.SolicitudRepository; // O infraestructure si no lo renombraste
 
 @Repository

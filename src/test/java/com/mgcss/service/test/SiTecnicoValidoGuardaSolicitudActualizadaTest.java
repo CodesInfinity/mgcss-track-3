@@ -15,9 +15,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.mgcss.domain.Enums.Estado;
-import com.mgcss.domain.Solicitud.Solicitud;
-import com.mgcss.domain.Tecnico.Tecnico;
+import com.mgcss.domain.tecnico.Tecnico;
+import com.mgcss.domain.enums.Estado;
+import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.infrastructure.SolicitudRepository;
 import com.mgcss.service.SolicitudService;
 

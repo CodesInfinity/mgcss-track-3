@@ -1,11 +1,11 @@
-package com.mgcss.domain.Solicitud; 
+package com.mgcss.domain.solicitud; 
 
 import java.security.SecureRandom;
 import java.util.Date;
 
-import com.mgcss.domain.Enums.Estado;
-import com.mgcss.domain.Tecnico.Tecnico;
-import com.mgcss.domain.Cliente.Cliente;
+import com.mgcss.domain.tecnico.Tecnico;
+import com.mgcss.domain.cliente.Cliente;
+import com.mgcss.domain.enums.Estado;
 
 
 public class Solicitud {

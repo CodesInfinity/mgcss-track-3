@@ -12,8 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.mgcss.domain.Cliente.Cliente;
-import com.mgcss.domain.Enums.TipoCliente;
+import com.mgcss.domain.cliente.Cliente;
+import com.mgcss.domain.enums.TipoCliente;
 import com.mgcss.infrastructure.ClienteRepository;
 import com.mgcss.service.ClienteService;
 

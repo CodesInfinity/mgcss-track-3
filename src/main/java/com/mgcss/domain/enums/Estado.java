@@ -1,4 +1,4 @@
-package com.mgcss.domain.Enums;
+package com.mgcss.domain.enums;
 
 public enum Estado {
 	ABIERTA,

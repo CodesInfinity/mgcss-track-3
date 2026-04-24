@@ -1,4 +1,4 @@
-package com.mgcss.domain.Tecnico;
+package com.mgcss.domain.tecnico;
 
 import java.security.SecureRandom;
 

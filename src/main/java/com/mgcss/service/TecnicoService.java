@@ -2,7 +2,7 @@ package com.mgcss.service;
 
 import java.util.Optional;
 
-import com.mgcss.domain.Tecnico.Tecnico;
+import com.mgcss.domain.tecnico.Tecnico;
 import com.mgcss.infrastructure.TecnicoRepository;
 
 import lombok.RequiredArgsConstructor;

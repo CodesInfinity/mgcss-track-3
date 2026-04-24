@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.mgcss.domain.Tecnico.Tecnico;
+import com.mgcss.domain.tecnico.Tecnico;
 
 class GetterYSetterTecnicoTest {
 

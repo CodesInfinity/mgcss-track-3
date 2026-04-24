@@ -7,21 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import com.mgcss.domain.Enums.Estado;
-import com.mgcss.domain.Solicitud.Solicitud;
+
+import com.mgcss.domain.enums.Estado;
+import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.infrastructure.SolicitudRepository;
 import com.mgcss.infrastructure.persistence.SolicitudRepositoryAdapter;
 
 @DataJpaTest
 @ActiveProfiles("test") // Usa tu application-test.yml
 @Import(SolicitudRepositoryAdapter.class) // Carga el adaptador manualmente
-public class JpaSolicitudRepositoryTest {
+class JpaSolicitudRepositoryTest {
 
     @Autowired
     private SolicitudRepository repository; // Inyectamos el puerto, no JPA directo
 
     @Test
-    public void testGuardarYRecuperarSolicitud() {
+    void testGuardarYRecuperarSolicitud() {
         // 1. Guardar entidad
         Solicitud nuevaSolicitud = new Solicitud();
         nuevaSolicitud.setDescripcion("Problema con el servidor");

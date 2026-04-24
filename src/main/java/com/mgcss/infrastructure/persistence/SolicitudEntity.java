@@ -1,11 +1,15 @@
 package com.mgcss.infrastructure.persistence;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
-import com.mgcss.domain.Enums.Estado;
-import com.mgcss.domain.Solicitud.Solicitud;
+
+import com.mgcss.domain.enums.Estado;
+import com.mgcss.domain.solicitud.Solicitud;
 
 @Entity
+@NoArgsConstructor
 @Table(name = "solicitudes")
 public class SolicitudEntity {
 
@@ -18,8 +22,6 @@ public class SolicitudEntity {
     private String descripcion;
     private Date fechaCreacion;
     private Date fechaCierre;
-
-    public SolicitudEntity() {}
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

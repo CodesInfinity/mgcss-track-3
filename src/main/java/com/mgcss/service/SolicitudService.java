@@ -1,8 +1,8 @@
 package com.mgcss.service;
 
-import com.mgcss.domain.Enums.Estado;
-import com.mgcss.domain.Solicitud.Solicitud;
-import com.mgcss.domain.Tecnico.Tecnico;
+import com.mgcss.domain.tecnico.Tecnico;
+import com.mgcss.domain.enums.Estado;
+import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.infrastructure.SolicitudRepository;
 
 public class SolicitudService {
@@ -17,7 +17,7 @@ public class SolicitudService {
 	}
 	
 	public void asignarTecnico(Long solicitudId, Tecnico tecnico) {
-		Solicitud solicitud = solicitudRepository.findById(solicitudId).orElseThrow(() -> new IllegalArgumentException());
+		Solicitud solicitud = solicitudRepository.findById(solicitudId).orElseThrow(IllegalArgumentException::new);
 		
 		if(solicitud != null && tecnico != null) {
 			solicitud.asignarTecnico(tecnico);
@@ -30,7 +30,7 @@ public class SolicitudService {
 		Solicitud solicitud = solicitudRepository.findById(solicitudId).orElse(null);
 		
 		if(solicitud != null) {
-			solicitud.setEstado(estado);;
+			solicitud.setEstado(estado);
 		}
 		
 		solicitudRepository.save(solicitud);
