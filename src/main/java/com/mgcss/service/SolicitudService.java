@@ -5,8 +5,6 @@ import com.mgcss.domain.Solicitud.Solicitud;
 import com.mgcss.domain.Tecnico.Tecnico;
 import com.mgcss.infrastructure.SolicitudRepository;
 
-import jakarta.persistence.EntityNotFoundException;
-
 public class SolicitudService {
 	private SolicitudRepository solicitudRepository;
 	
