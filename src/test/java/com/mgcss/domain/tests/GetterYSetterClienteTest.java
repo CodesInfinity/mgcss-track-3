@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.mgcss.domain.Cliente.Cliente;
-import com.mgcss.domain.Enums.TipoCliente;
+import com.mgcss.domain.cliente.Cliente;
+import com.mgcss.domain.enums.TipoCliente;
 
 
 class GetterYSetterClienteTest {

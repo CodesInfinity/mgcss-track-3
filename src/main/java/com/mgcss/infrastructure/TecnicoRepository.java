@@ -2,7 +2,7 @@ package com.mgcss.infrastructure;
 
 import java.util.Optional;
 
-import com.mgcss.domain.Tecnico.Tecnico;
+import com.mgcss.domain.tecnico.Tecnico;
 
 public interface TecnicoRepository {
 	Tecnico save(Tecnico tecnico);

@@ -1,7 +1,7 @@
 package com.mgcss.service;
 
-import com.mgcss.domain.Cliente.Cliente;
-import com.mgcss.domain.Enums.TipoCliente;
+import com.mgcss.domain.cliente.Cliente;
+import com.mgcss.domain.enums.TipoCliente;
 import com.mgcss.infrastructure.ClienteRepository;
 
 import lombok.RequiredArgsConstructor;

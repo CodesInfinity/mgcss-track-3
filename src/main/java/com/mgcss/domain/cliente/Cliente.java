@@ -1,8 +1,8 @@
-package com.mgcss.domain.Cliente;
+package com.mgcss.domain.cliente;
 
 import java.util.Random;
 
-import com.mgcss.domain.Enums.TipoCliente;
+import com.mgcss.domain.enums.TipoCliente;
 
 public class Cliente {
 	private Long id;

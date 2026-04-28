@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.mgcss.domain.Solicitud.Solicitud;
-import com.mgcss.domain.Enums.Estado;
+import com.mgcss.domain.enums.Estado;
+import com.mgcss.domain.solicitud.Solicitud;
 
 class NoCerrarSolicitudSiNoEnProcesoTest {
 
