@@ -82,13 +82,18 @@ public class Solicitud {
 	    this.fechaCierre = fechaCierre;
 	}
 	
-	
-	
 	public void cerrar() {	
 		if(this.estado == Estado.EN_PROCESO) {
 			this.estado = Estado.CERRADA;
 			this.fechaCierre = new Date();
 		}
+	}
+	
+	public void reabrir() {
+	    if (this.estado == Estado.CERRADA) {
+	        this.estado = Estado.EN_PROCESO;
+	        this.fechaCierre = null; // Limpiamos la fecha al reabrir
+	    }
 	}
 	
 	public void asignarTecnico(Tecnico tecnico) {
