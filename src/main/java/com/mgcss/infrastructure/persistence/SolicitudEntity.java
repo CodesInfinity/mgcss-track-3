@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import com.mgcss.domain.enums.Estado;
 import com.mgcss.domain.solicitud.Solicitud;
@@ -52,7 +51,7 @@ public class SolicitudEntity {
         if (solicitud.getHistorico() != null) {
             entity.historico = solicitud.getHistorico().stream()
                 .map(change -> new EstadoChangeEntity(change.estado(), change.fecha(), entity))
-                .collect(Collectors.toList());
+                .toList(); // Cambiado de .collect(Collectors.toList())
         }
         
         return entity;
