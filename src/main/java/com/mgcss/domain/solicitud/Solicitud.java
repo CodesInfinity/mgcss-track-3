@@ -26,36 +26,44 @@ public class Solicitud {
     
     public Solicitud() {
         this.id = random.nextLong();
-        this.estado = Estado.ABIERTA;
-        registrarCambio(Estado.ABIERTA);
+        // Usamos el setter para el registro inicial
+        setEstado(Estado.ABIERTA); 
     }
 
     private void registrarCambio(Estado nuevoEstado) {
         this.historico.add(new EstadoChange(nuevoEstado, new Date()));
     }
 
+    // --- Lógica de Negocio Refactorizada ---
+
     public void cerrar() {    
         if (this.estado == Estado.EN_PROCESO) {
-            this.estado = Estado.CERRADA;
+            setEstado(Estado.CERRADA); // El setter se encarga del histórico
             this.fechaCierre = new Date();
-            registrarCambio(Estado.CERRADA);
         }
     }
     
     public void reabrir() {
         if (this.estado == Estado.CERRADA) {
-            this.estado = Estado.EN_PROCESO;
+            setEstado(Estado.EN_PROCESO); // El setter se encarga del histórico
             this.fechaCierre = null;
-            registrarCambio(Estado.EN_PROCESO);
         }
     }
     
     public void asignarTecnico(Tecnico tecnico) {
         if (tecnico.getActivo() && this.estado != Estado.CERRADA) {
             this.tecnico = tecnico;
-            this.estado = Estado.EN_PROCESO;
-            registrarCambio(Estado.EN_PROCESO);
+            setEstado(Estado.EN_PROCESO); // El setter se encarga del histórico
         }
+    }
+
+    // --- Getters y Setters ---
+
+    public Estado getEstado() { return estado; }
+    
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+        registrarCambio(estado);
     }
 
     public List<EstadoChange> getHistorico() {
@@ -73,12 +81,6 @@ public class Solicitud {
 
     public Date getFechaCreacion() { return fechaCreacion; }
     public void setFechaCreacion(Date fechaCreacion) { this.fechaCreacion = fechaCreacion; }
-
-    public Estado getEstado() { return estado; }
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-        registrarCambio(estado);
-    }
 
     public Tecnico getTecnico() { return tecnico; }
     public void setTecnico(Tecnico tecnico) {
