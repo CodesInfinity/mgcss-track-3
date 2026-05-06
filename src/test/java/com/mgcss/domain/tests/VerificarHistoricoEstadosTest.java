@@ -5,10 +5,10 @@ import com.mgcss.domain.enums.Estado;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class VerificarHistoricoEstadosTest {
+class VerificarHistoricoEstadosTest {
 
 	@Test
-	public void cambiarEstado_RegistraEnHistorico() {
+	void cambiarEstado_RegistraEnHistorico() {
 	    Solicitud solicitud = new Solicitud(); // +1 (ABIERTA)
 	    
 	    solicitud.setEstado(Estado.EN_PROCESO); // +1

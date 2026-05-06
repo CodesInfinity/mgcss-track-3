@@ -5,10 +5,10 @@ import com.mgcss.domain.enums.Estado;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PermitirReabrirSolicitudCerradaTest {
+class PermitirReabrirSolicitudCerradaTest {
 
     @Test
-    public void reabrir_SolicitudCerrada_PasaAEnProceso() {
+    void reabrir_SolicitudCerrada_PasaAEnProceso() {
         // 1. Crear solicitud
         Solicitud solicitud = new Solicitud();
         

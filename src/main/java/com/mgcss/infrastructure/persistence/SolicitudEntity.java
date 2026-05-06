@@ -52,7 +52,7 @@ public class SolicitudEntity {
         if (solicitud.getHistorico() != null) {
             entity.historico = solicitud.getHistorico().stream()
                 .map(change -> new EstadoChangeEntity(change.estado(), change.fecha(), entity))
-                .collect(Collectors.toList());
+                .toList(); // Cambiado de .collect(Collectors.toList())
         }
         
         return entity;
