@@ -17,3 +17,11 @@ La entidad Solicitud necesita una nueva estructura para el histórico. Puede ser
 ¿Qué impacto tiene en persistencia?
 
 La entidad de base de datos SolicitudEntity deberá reflejar este nuevo histórico. Dependiendo del enfoque, requerirá una colección anexa (como @ElementCollection o una relación @OneToMany) y su mapeo correspondiente en SolicitudRepositoryAdapter.
+
+---
+
+Conclusión de la implementación.
+
+    - Refactorización: Se ha centralizado el registro del historial en el método `setEstado(Estado)`, simplificando los métodos de negocio (`cerrar`, `reabrir`, `asignarTecnico`) y garantizando la trazabilidad total.
+
+    - Persistencia: Se confirma el uso de una relación `@OneToMany` con `EstadoChangeEntity` para permitir un crecimiento independiente del histórico respecto a la entidad principal.
