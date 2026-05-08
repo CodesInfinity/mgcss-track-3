@@ -20,7 +20,7 @@ class GetterYSetterTecnicoTest {
 	    
 	    tecnico.setActivo(true);
 	    assertTrue(tecnico.isActivo());
-	    assertTrue(tecnico.getActivo());
+	    assertTrue(tecnico.isActivo());
 	    
 	}
 

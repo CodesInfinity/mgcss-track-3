@@ -3,9 +3,13 @@ package com.mgcss.infrastructure.persistence;
 import com.mgcss.domain.cliente.Cliente;
 import com.mgcss.domain.enums.TipoCliente;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "clientes")
 @NoArgsConstructor // Usamos Lombok para el constructor vacío como en tus notas de refactorización
 public class ClienteEntity {
@@ -17,16 +21,6 @@ public class ClienteEntity {
 
     @Enumerated(EnumType.STRING)
     private TipoCliente tipo;
-
-    // --- Getters y Setters ---
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public TipoCliente getTipo() { return tipo; }
-    public void setTipo(TipoCliente tipo) { this.tipo = tipo; }
 
     // --- Mapeo Hexagonal ---
 

@@ -51,7 +51,7 @@ public class Solicitud {
     }
     
     public void asignarTecnico(Tecnico tecnico) {
-        if (tecnico.getActivo() && this.estado != Estado.CERRADA) {
+        if (tecnico.isActivo() && this.estado != Estado.CERRADA) {
             this.tecnico = tecnico;
             setEstado(Estado.EN_PROCESO); // El setter se encarga del histórico
         }

@@ -2,9 +2,13 @@ package com.mgcss.infrastructure.persistence;
 
 import com.mgcss.domain.tecnico.Tecnico;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "tecnicos")
 @NoArgsConstructor
 public class TecnicoEntity {
@@ -14,16 +18,6 @@ public class TecnicoEntity {
     private String nombre;
     private String especialidad;
     private boolean activo;
-
-    // --- Getters y Setters ---
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public String getEspecialidad() { return especialidad; }
-    public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
-    public boolean isActivo() { return activo; }
-    public void setActivo(boolean activo) { this.activo = activo; }
 
     // --- Mapeo Hexagonal ---
     public static TecnicoEntity fromDomain(Tecnico tecnico) {
