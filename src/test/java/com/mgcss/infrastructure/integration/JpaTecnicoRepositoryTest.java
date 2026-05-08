@@ -1,7 +1,9 @@
 package com.mgcss.infrastructure.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +39,22 @@ class JpaTecnicoRepositoryTest {
         assertEquals("Redes", recuperado.getEspecialidad());
         assertTrue(recuperado.isActivo(), "El técnico debería estar activo al tener especialidad");
     }
+    
+    @Test
+    void testRecuperarTecnicoSinEspecialidad() {
+        // 1. Guardar un técnico sin especialidad usando el método del dominio
+        Tecnico nuevoTecnico = Tecnico.crearTecnico("Manuel");
+        Tecnico guardado = repository.save(nuevoTecnico);
+
+        // 2. Recuperarlo (esto forzará el paso por el 'else' en TecnicoEntity.toDomain)
+        Tecnico recuperado = repository.findById(guardado.getId()).orElse(null);
+
+        // 3. Verificar
+        assertNotNull(recuperado);
+        assertEquals("Manuel", recuperado.getNombre());
+        assertNull(recuperado.getEspecialidad());
+        assertFalse(recuperado.isActivo(), "Un técnico sin especialidad no debe estar activo");
+    }
+    
+    
 }
