@@ -1,5 +1,6 @@
 package com.mgcss.infrastructure.persistence;
 
-public interface JpaTecnicoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
+public interface JpaTecnicoRepository extends JpaRepository<TecnicoEntity, Long> {
 }
