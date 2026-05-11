@@ -1,7 +1,10 @@
 package com.mgcss.infrastructure.persistence;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -10,6 +13,8 @@ import com.mgcss.domain.enums.Estado;
 import com.mgcss.domain.solicitud.Solicitud;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "solicitudes")
 public class SolicitudEntity {
@@ -26,18 +31,6 @@ public class SolicitudEntity {
 
     @OneToMany(mappedBy = "solicitud", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<EstadoChangeEntity> historico = new ArrayList<>();
-
-    // --- Getters y Setters ---
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public Estado getEstado() { return estado; }
-    public void setEstado(Estado estado) { this.estado = estado; }
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
-    public Date getFechaCreacion() { return fechaCreacion; }
-    public void setFechaCreacion(Date fechaCreacion) { this.fechaCreacion = fechaCreacion; }
-    public Date getFechaCierre() { return fechaCierre; }
-    public void setFechaCierre(Date fechaCierre) { this.fechaCierre = fechaCierre; }
 
     // --- Mapeo Hexagonal ---
     public static SolicitudEntity fromDomain(Solicitud solicitud) {

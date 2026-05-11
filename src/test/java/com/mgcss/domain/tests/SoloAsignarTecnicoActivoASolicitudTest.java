@@ -18,7 +18,7 @@ class SoloAsignarTecnicoActivoASolicitudTest {
 		solicitud.asignarTecnico(tec1);
 		solicitud.asignarTecnico(tec2);
 		
-		assertEquals(true, solicitud.getTecnico().getActivo());
+		assertEquals(true, solicitud.getTecnico().isActivo());
 	}
 
 }

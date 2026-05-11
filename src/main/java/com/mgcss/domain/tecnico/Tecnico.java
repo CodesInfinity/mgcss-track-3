@@ -2,6 +2,11 @@ package com.mgcss.domain.tecnico;
 
 import java.security.SecureRandom;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Tecnico {
 	private Long id;
 	private String nombre;
@@ -9,38 +14,6 @@ public class Tecnico {
 	private boolean activo;
 	
 	private static SecureRandom random = new SecureRandom();
-	
-	public Long getId() {
-		return id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getEspecialidad() {
-		return especialidad;
-	}
-
-	public void setEspecialidad(String especialidad) {
-		this.especialidad = especialidad;
-	}
-
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-	
-	public boolean getActivo() {
-		return this.activo;
-	}
 
 	public static Tecnico crearTecnico(String nombre, String especialidad) {
 		Tecnico tec = new Tecnico();
