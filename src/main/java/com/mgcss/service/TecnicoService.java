@@ -30,4 +30,8 @@ public class TecnicoService {
 			tecnicoRepository.save(tecnico);
 		}
 	}
+	
+	public Tecnico obtenerTecnico(Long tecnicoId) {
+		return tecnicoRepository.findById(tecnicoId).orElse(null);
+	}
 }

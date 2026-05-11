@@ -57,5 +57,26 @@ class TecnicoServiceTest {
         assertTrue(tecnico.isActivo(), "El técnico debería estar activo");
         verify(tecnicoRepository).save(tecnico);
     }
+	
+	@Test
+	void obtenerTecnicoTest() {
+		Long idExistente = 1L;
+		Long idNoExistente = 100L;
+		Tecnico tecnico = Tecnico.crearTecnico("Manuel", "Software");
+		
+		when(tecnicoRepository.findById(idExistente)).thenReturn(Optional.of(tecnico));
+		when(tecnicoRepository.findById(idNoExistente)).thenReturn(Optional.empty());
+		
+		Tecnico resultadoExiste = tecnicoService.obtenerTecnico(idExistente);
+		Tecnico resultadoNoExiste = tecnicoService.obtenerTecnico(idNoExistente);
+		
+		assertNotNull(resultadoExiste);
+		assertEquals(tecnico, resultadoExiste);
+		assertNull(resultadoNoExiste);
+		
+		verify(tecnicoRepository, times(1)).findById(idExistente);
+		verify(tecnicoRepository, times(1)).findById(idNoExistente);
+	}
+	
 
 }
