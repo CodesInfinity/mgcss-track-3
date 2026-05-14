@@ -2,10 +2,13 @@ package com.mgcss.service;
 
 import com.mgcss.domain.tecnico.Tecnico;
 
+import org.springframework.stereotype.Service;
+
 import com.mgcss.domain.enums.Estado;
 import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.infrastructure.SolicitudRepository;
 
+@Service
 public class SolicitudService {
 	private SolicitudRepository solicitudRepository;
 	
