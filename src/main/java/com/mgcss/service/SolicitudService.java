@@ -2,6 +2,8 @@ package com.mgcss.service;
 
 import com.mgcss.domain.tecnico.Tecnico;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.mgcss.domain.enums.Estado;
@@ -20,7 +22,7 @@ public class SolicitudService {
 		Solicitud sol = new Solicitud();
 		sol.setDescripcion(descripcion);
 		
-		return sol;
+		return solicitudRepository.save(sol);
 	}
 	
 	public void asignarTecnico(Long solicitudId, Tecnico tecnico) {
@@ -54,6 +56,10 @@ public class SolicitudService {
 		if(solicitud != null && solicitud.getEstado() == Estado.CERRADA) {
 			solicitud.reabrir();
 		}
+	}
+	
+	public List<Solicitud> listarSolicitudes() {
+		return solicitudRepository.findAll();
 	}
 
 }

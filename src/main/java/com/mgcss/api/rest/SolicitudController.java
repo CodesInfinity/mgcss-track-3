@@ -25,7 +25,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
@@ -61,7 +60,7 @@ public class SolicitudController {
 		description = "Devuelve los detalles de una solicitud específica basándose en su identificador único."
 	)
 	@ApiResponse(responseCode = "200", description = "Solicitud encontrada", content = @Content(schema = @Schema(implementation = SolicitudResponseDto.class)))
-	@ApiResponse(responseCode = "400", description = "La solicitud no existe (nota: estándar REST suele usar 404 para esto)", content = @Content)
+	@ApiResponse(responseCode = "400", description = "La solicitud no existe", content = @Content)
 	@GetMapping("/{id}")
 	public ResponseEntity<SolicitudResponseDto> consultarSolicitud(@PathVariable Long id){
 		Solicitud solicitud = this.solicitudService.obtenerSolicitud(id);
@@ -144,4 +143,20 @@ public class SolicitudController {
 		}
 	}
 	
+		@Operation(
+			summary = "Consultar todas las solicitudes", 
+			description = "Devuelve una lista con todos las solicitudes"
+		)
+		@ApiResponse(responseCode = "200", description = "Listado obtenido correctamente")
+		@ApiResponse(responseCode = "404", description = "No se encontraron solicitudes", content = @Content)
+		@GetMapping("/listarSolicitudes")
+		public ResponseEntity<List<Solicitud>> listarSolicitudes() {
+			List<Solicitud> solicitudes = this.solicitudService.listarSolicitudes();
+			
+			if (solicitudes != null && !solicitudes.isEmpty()) {
+		        return ResponseEntity.ok(solicitudes);
+		    } else {
+		        return ResponseEntity.notFound().build();
+		    }
+		}
 }
