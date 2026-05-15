@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -190,5 +191,38 @@ class SolicitudControllerTest {
 
 		mockMvc.perform(get("/api/solicitudes/{id}/historico", id))
 				.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	void consultarListadoCuandoEsNullRetorna404() throws Exception {
+	    when(solicitudService.listarSolicitudes()).thenReturn(null);
+
+	    mockMvc.perform(get("/api/solicitudes/listarSolicitudes"))
+	           .andExpect(status().isNotFound());
+	}
+
+	@Test
+	void consultarListadoCuandoEstaVacioRetorna404() throws Exception {
+	    when(solicitudService.listarSolicitudes()).thenReturn(Collections.emptyList());
+
+	    mockMvc.perform(get("/api/solicitudes/listarSolicitudes"))
+	           .andExpect(status().isNotFound());
+	}
+	
+	@Test
+	void consultarListadoCuandoExistenElementosRetorna200() throws Exception {
+	    Solicitud solicitud = new Solicitud();
+	    solicitud.setId(1L);
+	    solicitud.setDescripcion("Mantenimiento programado");
+	    solicitud.setEstado(Estado.ABIERTA);
+	    
+	    List<Solicitud> listaMock = List.of(solicitud);
+	    when(solicitudService.listarSolicitudes()).thenReturn(listaMock);
+
+	    mockMvc.perform(get("/api/solicitudes/listarSolicitudes"))
+	           .andExpect(status().isOk())
+	           .andExpect(jsonPath("$.size()").value(1))
+	           .andExpect(jsonPath("$[0].id").value(1L))
+	           .andExpect(jsonPath("$[0].descripcion").value("Mantenimiento programado"));
 	}
 }
