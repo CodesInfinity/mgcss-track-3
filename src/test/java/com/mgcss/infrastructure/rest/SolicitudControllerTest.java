@@ -208,4 +208,21 @@ class SolicitudControllerTest {
 	    mockMvc.perform(get("/api/solicitudes/listarSolicitudes"))
 	           .andExpect(status().isNotFound());
 	}
+	
+	@Test
+	void consultarListadoCuandoExistenElementosRetorna200() throws Exception {
+	    Solicitud solicitud = new Solicitud();
+	    solicitud.setId(1L);
+	    solicitud.setDescripcion("Mantenimiento programado");
+	    solicitud.setEstado(Estado.ABIERTA);
+	    
+	    List<Solicitud> listaMock = List.of(solicitud);
+	    when(solicitudService.listarSolicitudes()).thenReturn(listaMock);
+
+	    mockMvc.perform(get("/api/solicitudes/listarSolicitudes"))
+	           .andExpect(status().isOk())
+	           .andExpect(jsonPath("$.size()").value(1))
+	           .andExpect(jsonPath("$[0].id").value(1L))
+	           .andExpect(jsonPath("$[0].descripcion").value("Mantenimiento programado"));
+	}
 }

@@ -7,6 +7,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -93,5 +94,50 @@ class SiTecnicoValidoGuardaSolicitudActualizadaTest {
 		verify(solicitudRepository, times(1)).findById(idCerrada);
 		verify(solicitudRepository, times(1)).findById(idAbierta);
 		verify(solicitudRepository, times(1)).findById(idNoExiste);
+	}
+	
+	@Test
+	void listarSolicitudesTest() {
+		List<Solicitud> solicitudesMock = List.of(new Solicitud(), new Solicitud());
+		when(solicitudRepository.findAll()).thenReturn(solicitudesMock);
+		
+		List<Solicitud> resultado = solicitudService.listarSolicitudes();
+		
+		assertNotNull(resultado);
+		assertEquals(2, resultado.size());
+		assertEquals(solicitudesMock, resultado);
+		verify(solicitudRepository, times(1)).findAll();
+	}
+	
+	@Test
+	void crearSolicitudGuardaYRetornaSolicitudTest() {
+		String descripcion = "Pantalla rota";
+		Solicitud solicitudGuardada = new Solicitud();
+		solicitudGuardada.setId(1L);
+		solicitudGuardada.setDescripcion(descripcion);
+		
+		when(solicitudRepository.save(any(Solicitud.class))).thenReturn(solicitudGuardada);
+		
+		Solicitud resultado = solicitudService.crearSolicitud(descripcion);
+		
+		assertNotNull(resultado);
+		assertEquals(descripcion, resultado.getDescripcion());
+		verify(solicitudRepository, times(1)).save(any(Solicitud.class));
+	}
+	
+	@Test
+	void cambiarEstadoCuandoSolicitudExisteTest() {
+		Long id = 1L;
+		Solicitud solicitudMock = new Solicitud();
+		solicitudMock.setId(id);
+		solicitudMock.setEstado(Estado.ABIERTA); // Estado inicial
+		
+		when(solicitudRepository.findById(id)).thenReturn(Optional.of(solicitudMock));
+		
+		solicitudService.cambiarEstado(id, Estado.EN_PROCESO);
+		
+		assertEquals(Estado.EN_PROCESO, solicitudMock.getEstado());
+		verify(solicitudRepository, times(1)).findById(id);
+		verify(solicitudRepository, times(1)).save(solicitudMock);
 	}
 }

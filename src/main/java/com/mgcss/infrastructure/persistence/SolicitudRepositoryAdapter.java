@@ -31,10 +31,8 @@ public class SolicitudRepositoryAdapter implements SolicitudRepository {
     public List<Solicitud> findAll(){
     	List<SolicitudEntity> solEnt = jpaRepository.findAll();
     	
-    	List<Solicitud> solicitudes =  solEnt.stream()
-                .map(SolicitudEntity::toDomain)
-                .toList();
-    	
-    	return solicitudes;
+    	return solEnt.stream()
+	            .map(SolicitudEntity::toDomain)
+	            .toList();
     }
 }
