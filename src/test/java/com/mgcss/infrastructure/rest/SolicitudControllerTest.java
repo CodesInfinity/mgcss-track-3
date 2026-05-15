@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -190,5 +191,21 @@ class SolicitudControllerTest {
 
 		mockMvc.perform(get("/api/solicitudes/{id}/historico", id))
 				.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	void consultarListadoCuandoEsNullRetorna404() throws Exception {
+	    when(solicitudService.listarSolicitudes()).thenReturn(null);
+
+	    mockMvc.perform(get("/api/solicitudes/listarSolicitudes"))
+	           .andExpect(status().isNotFound());
+	}
+
+	@Test
+	void consultarListadoCuandoEstaVacioRetorna404() throws Exception {
+	    when(solicitudService.listarSolicitudes()).thenReturn(Collections.emptyList());
+
+	    mockMvc.perform(get("/api/solicitudes/listarSolicitudes"))
+	           .andExpect(status().isNotFound());
 	}
 }
