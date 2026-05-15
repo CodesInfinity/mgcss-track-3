@@ -2,12 +2,15 @@ package com.mgcss.service;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.mgcss.domain.tecnico.Tecnico;
 import com.mgcss.infrastructure.TecnicoRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Service
 public class TecnicoService {
 	private TecnicoRepository tecnicoRepository;
 	
@@ -29,5 +32,9 @@ public class TecnicoService {
 			
 			tecnicoRepository.save(tecnico);
 		}
+	}
+	
+	public Tecnico obtenerTecnico(Long tecnicoId) {
+		return tecnicoRepository.findById(tecnicoId).orElse(null);
 	}
 }

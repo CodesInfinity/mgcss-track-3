@@ -1,10 +1,14 @@
 package com.mgcss.service;
 
 import com.mgcss.domain.tecnico.Tecnico;
+
+import org.springframework.stereotype.Service;
+
 import com.mgcss.domain.enums.Estado;
 import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.infrastructure.SolicitudRepository;
 
+@Service
 public class SolicitudService {
 	private SolicitudRepository solicitudRepository;
 	
@@ -12,8 +16,11 @@ public class SolicitudService {
 		this.solicitudRepository = solicitudRepository;
 	}
 	
-	public Solicitud crearSolicitud() {
-		return new Solicitud();
+	public Solicitud crearSolicitud(String descripcion) {
+		Solicitud sol = new Solicitud();
+		sol.setDescripcion(descripcion);
+		
+		return sol;
 	}
 	
 	public void asignarTecnico(Long solicitudId, Tecnico tecnico) {
@@ -36,4 +43,17 @@ public class SolicitudService {
 		solicitudRepository.save(solicitud);
 	}
 	
+	public Solicitud obtenerSolicitud(Long solicitudId){
+		return solicitudRepository.findById(solicitudId).orElse(null);
+		
+	}
+	
+	public void reabrirSolicitud(Long solicitudId) {
+		Solicitud solicitud = solicitudRepository.findById(solicitudId).orElse(null);
+		
+		if(solicitud != null && solicitud.getEstado() == Estado.CERRADA) {
+			solicitud.reabrir();
+		}
+	}
+
 }

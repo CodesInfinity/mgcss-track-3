@@ -54,5 +54,44 @@ class SiTecnicoValidoGuardaSolicitudActualizadaTest {
 		
 		verify(solicitudRepository, never()).save(any());
 	}
-
+	
+	@Test
+	void obtenerSolicitudTest() {
+		Solicitud solicitud = new Solicitud();
+		
+		when(solicitudRepository.findById(solicitud.getId())).thenReturn(Optional.of(solicitud));
+		
+		Solicitud resultado = solicitudService.obtenerSolicitud(solicitud.getId());
+		
+		assertNotNull(resultado);
+		assertEquals(solicitud, resultado);
+		verify(solicitudRepository, times(1)).findById(solicitud.getId());
+	}
+	
+	@Test
+	void reabrirSolicitudTest() {
+		Long idCerrada = 1L;
+		Long idAbierta = 2L;
+		Long idNoExiste = 100L;
+		
+		Solicitud solicitudCerrada = new Solicitud();
+		solicitudCerrada.setEstado(Estado.CERRADA);
+		
+		Solicitud solicitudAbierta = new Solicitud();
+		
+		when(solicitudRepository.findById(idCerrada)).thenReturn(Optional.of(solicitudCerrada));
+		when(solicitudRepository.findById(idAbierta)).thenReturn(Optional.of(solicitudAbierta));
+		when(solicitudRepository.findById(idNoExiste)).thenReturn(Optional.empty());
+		
+		solicitudService.reabrirSolicitud(idCerrada);
+		solicitudService.reabrirSolicitud(idAbierta);
+		assertDoesNotThrow(() -> solicitudService.reabrirSolicitud(idNoExiste));
+		
+		assertEquals(Estado.EN_PROCESO, solicitudCerrada.getEstado());
+		assertEquals(Estado.ABIERTA, solicitudAbierta.getEstado());
+		
+		verify(solicitudRepository, times(1)).findById(idCerrada);
+		verify(solicitudRepository, times(1)).findById(idAbierta);
+		verify(solicitudRepository, times(1)).findById(idNoExiste);
+	}
 }

@@ -28,6 +28,7 @@ public class Solicitud {
         this.id = random.nextLong();
         // Usamos el setter para el registro inicial
         setEstado(Estado.ABIERTA); 
+        setFechaCreacion(new Date());
     }
 
     private void registrarCambio(Estado nuevoEstado) {
