@@ -27,7 +27,7 @@ class GetterYSetterSolicitudTest {
         assertEquals("Reparación de PC", solicitud.getDescripcion());
         assertEquals(fecha, solicitud.getFechaCreacion());
         assertEquals(Estado.ABIERTA, solicitud.getEstado());
-        assertNotNull(solicitud.getId());
+        assertNull(solicitud.getId());
 	}
 
 }

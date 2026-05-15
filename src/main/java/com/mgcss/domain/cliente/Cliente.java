@@ -7,11 +7,8 @@ public class Cliente {
 	private String nombre;
 	private String email;
 	private TipoCliente tipo;
-
-	private static Long contadorId = 1L;
 	
 	public Cliente(String nombre, String email, TipoCliente tipo) {
-		this.id = Cliente.contadorId++;
 		this.nombre = nombre;
 		this.email = email;
 		this.tipo = tipo;
