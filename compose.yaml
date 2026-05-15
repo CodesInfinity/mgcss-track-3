@@ -1,15 +1,17 @@
 services:
   app:
+    build: .
     image: 'mgcss-track:latest'
     ports:
       - '8080:8080'
     environment:
-      # Activamos el perfil de producción (opcional, dependiendo de tu application.yml)
       - SPRING_PROFILES_ACTIVE=prod
-      # La URL apunta a "postgres" (el nombre del servicio de abajo) en vez de localhost
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/mydatabase
       - SPRING_DATASOURCE_USERNAME=myuser
       - SPRING_DATASOURCE_PASSWORD=secret
+      # --- INYECCIÓN DE HIBERNATE ---
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
     depends_on:
       - postgres
 
