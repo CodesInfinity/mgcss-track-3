@@ -1,5 +1,6 @@
 package com.mgcss.infrastructure.persistence;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +25,16 @@ public class SolicitudRepositoryAdapter implements SolicitudRepository {
     @Override
     public Optional<Solicitud> findById(Long id) {
         return jpaRepository.findById(id).map(SolicitudEntity::toDomain);
+    }
+    
+    @Override
+    public List<Solicitud> findAll(){
+    	List<SolicitudEntity> solEnt = jpaRepository.findAll();
+    	
+    	List<Solicitud> solicitudes =  solEnt.stream()
+                .map(SolicitudEntity::toDomain)
+                .toList();
+    	
+    	return solicitudes;
     }
 }

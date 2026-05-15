@@ -1,6 +1,5 @@
 package com.mgcss.domain.solicitud; 
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -20,12 +19,13 @@ public class Solicitud {
     private Date fechaCierre;
     private List<EstadoChange> historico = new ArrayList<>();
     
-    private static final SecureRandom random = new SecureRandom();
+    
+    private static Long contadorId = 1L;
 
     public record EstadoChange(Estado estado, Date fecha) {}
     
     public Solicitud() {
-        this.id = random.nextLong();
+        this.id = Solicitud.contadorId++;
         // Usamos el setter para el registro inicial
         setEstado(Estado.ABIERTA); 
         setFechaCreacion(new Date());

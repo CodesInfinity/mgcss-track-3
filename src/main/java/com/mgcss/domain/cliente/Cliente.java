@@ -1,7 +1,5 @@
 package com.mgcss.domain.cliente;
 
-import java.util.Random;
-
 import com.mgcss.domain.enums.TipoCliente;
 
 public class Cliente {
@@ -9,11 +7,11 @@ public class Cliente {
 	private String nombre;
 	private String email;
 	private TipoCliente tipo;
-	
-	private static Random random = new Random();
+
+	private static Long contadorId = 1L;
 	
 	public Cliente(String nombre, String email, TipoCliente tipo) {
-		this.id = random.nextLong();
+		this.id = Cliente.contadorId++;
 		this.nombre = nombre;
 		this.email = email;
 		this.tipo = tipo;
