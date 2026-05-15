@@ -41,11 +41,8 @@ public class SolicitudController {
 		summary = "Crear una nueva solicitud", 
 		description = "Registra una nueva solicitud en el sistema con la descripción proporcionada. El estado inicial se establece automáticamente en ABIERTA."
 	)
-	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Solicitud creada exitosamente", 
-					 content = @Content(schema = @Schema(implementation = SolicitudResponseDto.class))),
-		@ApiResponse(responseCode = "400", description = "Error en los datos de entrada o no se pudo crear la solicitud", content = @Content)
-	})
+	@ApiResponse(responseCode = "200", description = "Solicitud creada exitosamente", content = @Content(schema = @Schema(implementation = SolicitudResponseDto.class)))
+	@ApiResponse(responseCode = "400", description = "Error en los datos de entrada o no se pudo crear la solicitud", content = @Content)
 	@PostMapping()
 	public ResponseEntity<SolicitudResponseDto> crearSolicitud(@RequestBody SolicitudCreateRequestDto request){
 		Solicitud solicitud = this.solicitudService.crearSolicitud(request.descripcion());
@@ -63,11 +60,8 @@ public class SolicitudController {
 		summary = "Consultar solicitud por ID", 
 		description = "Devuelve los detalles de una solicitud específica basándose en su identificador único."
 	)
-	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Solicitud encontrada", 
-					 content = @Content(schema = @Schema(implementation = SolicitudResponseDto.class))),
-		@ApiResponse(responseCode = "400", description = "La solicitud no existe (nota: estándar REST suele usar 404 para esto)", content = @Content)
-	})
+	@ApiResponse(responseCode = "200", description = "Solicitud encontrada", content = @Content(schema = @Schema(implementation = SolicitudResponseDto.class)))
+	@ApiResponse(responseCode = "400", description = "La solicitud no existe (nota: estándar REST suele usar 404 para esto)", content = @Content)
 	@GetMapping("/{id}")
 	public ResponseEntity<SolicitudResponseDto> consultarSolicitud(@PathVariable Long id){
 		Solicitud solicitud = this.solicitudService.obtenerSolicitud(id);
@@ -83,10 +77,8 @@ public class SolicitudController {
 		summary = "Asignar un técnico a la solicitud", 
 		description = "Vincula un técnico existente a una solicitud. Esta acción cambiará internamente el estado de la solicitud a EN_PROCESO."
 	)
-	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Técnico asignado correctamente"),
-		@ApiResponse(responseCode = "400", description = "El técnico proporcionado no existe o no es válido")
-	})
+	@ApiResponse(responseCode = "200", description = "Técnico asignado correctamente")
+	@ApiResponse(responseCode = "400", description = "El técnico proporcionado no existe o no es válido")
 	@PutMapping("/{id}/tecnicos")
 	public ResponseEntity<Void> asignarTecnico(
 			@PathVariable Long id,
@@ -107,10 +99,8 @@ public class SolicitudController {
 		summary = "Cambiar estado de la solicitud", 
 		description = "Fuerza el cambio de estado de una solicitud (Ej. CERRADA, EN_PROCESO). Se pasa el ID de la solicitud y el nuevo estado en el cuerpo de la petición."
 	)
-	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Estado de la solicitud actualizado correctamente"),
-		@ApiResponse(responseCode = "404", description = "No se encontró la solicitud con el ID proporcionado")
-	})
+	@ApiResponse(responseCode = "200", description = "Estado de la solicitud actualizado correctamente")
+	@ApiResponse(responseCode = "404", description = "No se encontró la solicitud con el ID proporcionado")
 	@PatchMapping("/estado")
 	public ResponseEntity<Void> cambiarEstado(
 			@RequestBody SolicitudCambiarEstadoRequestDto request) {
@@ -130,9 +120,7 @@ public class SolicitudController {
 		summary = "Reabrir solicitud", 
 		description = "Permite pasar una solicitud que actualmente se encuentra en estado CERRADA nuevamente a EN_PROCESO."
 	)
-	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Operación completada (si la solicitud no estaba CERRADA, no se aplicarán cambios)")
-	})
+	@ApiResponse(responseCode = "200", description = "Operación completada (si la solicitud no estaba CERRADA, no se aplicarán cambios)")
 	@PatchMapping("/{id}/reabrir")
 	public ResponseEntity<Void> reabrirSolicitud(@PathVariable Long id) {
 		this.solicitudService.reabrirSolicitud(id);
@@ -143,10 +131,8 @@ public class SolicitudController {
 		summary = "Consultar histórico de la solicitud", 
 		description = "Devuelve una lista con todos los cambios de estado que ha sufrido la solicitud desde su creación, ordenados por fecha."
 	)
-	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Historial obtenido correctamente"),
-		@ApiResponse(responseCode = "404", description = "No se encontró la solicitud para consultar su historial")
-	})
+	@ApiResponse(responseCode = "200", description = "Historial obtenido correctamente")
+	@ApiResponse(responseCode = "404", description = "No se encontró la solicitud para consultar su historial")
 	@GetMapping("/{id}/historico")
 	public ResponseEntity<List<Solicitud.EstadoChange>> consultarHistoricoSolicitud(@PathVariable Long id) {
 		Solicitud solicitud = this.solicitudService.obtenerSolicitud(id);

@@ -44,9 +44,8 @@ public class SolicitudService {
 	}
 	
 	public Solicitud obtenerSolicitud(Long solicitudId){
-		Solicitud solicitud = solicitudRepository.findById(solicitudId).orElse(null);
+		return solicitudRepository.findById(solicitudId).orElse(null);
 		
-		return solicitud;
 	}
 	
 	public void reabrirSolicitud(Long solicitudId) {
