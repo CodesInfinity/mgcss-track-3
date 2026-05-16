@@ -14,6 +14,7 @@ import lombok.Setter;
 public class TecnicoEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private String especialidad;

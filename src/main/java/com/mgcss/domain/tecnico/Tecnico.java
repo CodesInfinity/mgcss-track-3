@@ -11,11 +11,8 @@ public class Tecnico {
 	private String especialidad;
 	private boolean activo;
 	
-	private static Long contadorId = 1L;
-
 	public static Tecnico crearTecnico(String nombre, String especialidad) {
 		Tecnico tec = new Tecnico();
-		tec.id = Tecnico.contadorId++;
 		tec.nombre = nombre;
 		tec.especialidad = especialidad;
 		tec.activo = true;
@@ -25,7 +22,6 @@ public class Tecnico {
 	
 	public static Tecnico crearTecnico(String nombre) {
 		Tecnico tec = new Tecnico();
-		tec.id = Tecnico.contadorId++;
 		tec.nombre = nombre;
 		tec.activo = false;
 		

@@ -22,7 +22,7 @@ class GetterYSetterClienteTest {
         assertEquals(email, cliente.getEmail(), "El email no coincide");
         assertEquals(tipo, cliente.getTipo(), "El tipo de cliente no coincide");
         
-        assertNotNull(cliente.getId(), "El ID debería haberse generado automáticamente");
+        assertNull(cliente.getId(), "El ID de dominio debe ser nulo antes de persistir");
 	}
 
 }
