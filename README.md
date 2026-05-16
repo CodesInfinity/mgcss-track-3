@@ -320,7 +320,7 @@ El entorno local está compuesto por:
 
 ---
 
-# 👨‍💻 Autor
+# 👨‍💻 Autores
 Sergio Núñez Sierra y Agustín Rodríguez Aguilar.
 
 Proyecto desarrollado como backend corporativo orientado a buenas prácticas de arquitectura, mantenibilidad y calidad de software empresarial.
