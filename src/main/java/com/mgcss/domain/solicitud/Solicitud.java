@@ -19,13 +19,9 @@ public class Solicitud {
     private Date fechaCierre;
     private List<EstadoChange> historico = new ArrayList<>();
     
-    
-    private static Long contadorId = 1L;
-
     public record EstadoChange(Estado estado, Date fecha) {}
     
     public Solicitud() {
-        this.id = Solicitud.contadorId++;
         // Usamos el setter para el registro inicial
         setEstado(Estado.ABIERTA); 
         setFechaCreacion(new Date());

@@ -20,6 +20,7 @@ import com.mgcss.domain.solicitud.Solicitud;
 public class SolicitudEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
