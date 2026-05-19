@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class TecnicoService {
-	private TecnicoRepository tecnicoRepository;
+	private final TecnicoRepository tecnicoRepository;
 	
 	public Tecnico crearTecnicoSinEspecialidad(String nombre) {
 		return tecnicoRepository.save(Tecnico.crearTecnico(nombre));

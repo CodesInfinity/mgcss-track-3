@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class ClienteService {
-	private ClienteRepository clienteRepository;
+	private final ClienteRepository clienteRepository;
 	
 	public Cliente crearCliente(String nombre, String email, TipoCliente tipo) {		
 		return clienteRepository.save(new Cliente(nombre, email, tipo));
