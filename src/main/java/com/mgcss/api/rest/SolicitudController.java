@@ -85,7 +85,7 @@ public class SolicitudController {
 		
 		Tecnico tecnico = this.tecnicoService.obtenerTecnico(request.tecnicoId());
 		
-		if (tecnico == null) {
+		if (tecnico == null || !tecnico.isActivo()) {
 			return ResponseEntity.badRequest().build();
 		}
 		

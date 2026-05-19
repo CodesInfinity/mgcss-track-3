@@ -172,7 +172,7 @@ class SolicitudControllerTest {
 	@Test
 	void consultarHistoricoCuandoExisteRetornaLista() throws Exception {
 		Long id = 1L;
-		Solicitud solicitud = new Solicitud();
+		Solicitud solicitud = Solicitud.nuevaSolicitud(null);
 		List<Solicitud.EstadoChange> historico = solicitud.getHistorico();
 
 		when(solicitudService.obtenerSolicitud(id)).thenReturn(solicitud);

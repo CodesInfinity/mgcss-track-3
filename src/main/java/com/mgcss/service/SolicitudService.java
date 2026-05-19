@@ -19,10 +19,9 @@ public class SolicitudService {
 	}
 	
 	public Solicitud crearSolicitud(String descripcion) {
-		Solicitud sol = new Solicitud();
-		sol.setDescripcion(descripcion);
-		
-		return solicitudRepository.save(sol);
+	    Solicitud sol = Solicitud.nuevaSolicitud(descripcion); 
+	    
+	    return solicitudRepository.save(sol);
 	}
 	
 	public void asignarTecnico(Long solicitudId, Tecnico tecnico) {
