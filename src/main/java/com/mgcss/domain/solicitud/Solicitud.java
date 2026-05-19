@@ -6,9 +6,13 @@ import java.util.Date;
 import java.util.List;
 
 import com.mgcss.domain.tecnico.Tecnico;
+
+import lombok.NoArgsConstructor;
+
 import com.mgcss.domain.cliente.Cliente;
 import com.mgcss.domain.enums.Estado;
 
+@NoArgsConstructor
 public class Solicitud {
     private Long id;
     private Cliente cliente;
@@ -21,14 +25,17 @@ public class Solicitud {
     
     public record EstadoChange(Estado estado, Date fecha) {}
     
-    public Solicitud() {
-        // Usamos el setter para el registro inicial
-        setEstado(Estado.ABIERTA); 
-        setFechaCreacion(new Date());
-    }
-
     private void registrarCambio(Estado nuevoEstado) {
         this.historico.add(new EstadoChange(nuevoEstado, new Date()));
+    }
+    
+    public static Solicitud nuevaSolicitud(String descripcion) {
+        Solicitud solicitud = new Solicitud();
+        solicitud.descripcion = descripcion;
+        solicitud.fechaCreacion = new Date();
+        solicitud.estado = Estado.ABIERTA;
+        solicitud.historico.add(new EstadoChange(Estado.ABIERTA, solicitud.fechaCreacion));
+        return solicitud;
     }
 
     // --- Lógica de Negocio Refactorizada ---

@@ -4,6 +4,7 @@ services:
     image: 'mgcss-track:latest'
     ports:
       - '8080:8080'
+      - '5005:5005'
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/mydatabase
@@ -12,6 +13,7 @@ services:
       # --- INYECCIÓN DE HIBERNATE ---
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_JPA_SHOW_SQL=true
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
     depends_on:
       - postgres
 
