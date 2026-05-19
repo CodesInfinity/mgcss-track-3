@@ -75,10 +75,10 @@ class SiTecnicoValidoGuardaSolicitudActualizadaTest {
 		Long idAbierta = 2L;
 		Long idNoExiste = 100L;
 		
-		Solicitud solicitudCerrada = new Solicitud();
+		Solicitud solicitudCerrada = Solicitud.nuevaSolicitud(null);
 		solicitudCerrada.setEstado(Estado.CERRADA);
 		
-		Solicitud solicitudAbierta = new Solicitud();
+		Solicitud solicitudAbierta = Solicitud.nuevaSolicitud(null);
 		
 		when(solicitudRepository.findById(idCerrada)).thenReturn(Optional.of(solicitudCerrada));
 		when(solicitudRepository.findById(idAbierta)).thenReturn(Optional.of(solicitudAbierta));

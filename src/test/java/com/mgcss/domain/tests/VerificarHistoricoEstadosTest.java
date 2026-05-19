@@ -9,7 +9,7 @@ class VerificarHistoricoEstadosTest {
 
 	@Test
 	void cambiarEstado_RegistraEnHistorico() {
-	    Solicitud solicitud = new Solicitud(); // +1 (ABIERTA)
+	    Solicitud solicitud = Solicitud.nuevaSolicitud(null); // +1 (ABIERTA)
 	    
 	    solicitud.setEstado(Estado.EN_PROCESO); // +1
 	    solicitud.cerrar();                     // +1
