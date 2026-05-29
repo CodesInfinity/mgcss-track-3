@@ -16,4 +16,8 @@ public class ClienteService {
 	public Cliente crearCliente(String nombre, String email, TipoCliente tipo) {		
 		return clienteRepository.save(new Cliente(nombre, email, tipo));
 	}
+	
+	public Cliente obtenerCliente(Long id) {
+		return clienteRepository.find(id).orElse(null);
+	}
 }

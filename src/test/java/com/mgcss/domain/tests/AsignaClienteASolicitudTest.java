@@ -20,5 +20,16 @@ class AsignaClienteASolicitudTest {
 		assertNotNull(solicitud.getCliente());
 		
 	}
+	
+	@Test
+	void testAsignarCliente() {
+		Cliente cliente = new Cliente("Juan", "xxx@xxx.com", TipoCliente.STANDARD);
+		Solicitud solicitud = new Solicitud();
+		
+		solicitud.asignarCliente(cliente);
+		
+		assertNotNull(solicitud.getCliente());
+		
+	}
 
 }

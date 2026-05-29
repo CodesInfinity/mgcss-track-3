@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.mgcss.domain.cliente.Cliente;
 import com.mgcss.domain.enums.Estado;
 import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.infrastructure.SolicitudRepository;
@@ -59,6 +60,16 @@ public class SolicitudService {
 	
 	public List<Solicitud> listarSolicitudes() {
 		return solicitudRepository.findAll();
+	}
+	
+	public void asiganrCliente(Long solicitudId, Cliente cliente) {
+		Solicitud solicitud = solicitudRepository.findById(solicitudId).orElse(null);
+		
+		if(solicitud != null) {
+			solicitud.asignarCliente(cliente);
+		}
+		
+		solicitudRepository.save(solicitud);
 	}
 
 }

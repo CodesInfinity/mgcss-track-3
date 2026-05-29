@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.mgcss.api.dto.request.solicitud.SolicitudAsignarClienteRequestDto;
 import com.mgcss.api.dto.request.solicitud.SolicitudAsignarTecnicoRequestDto;
 import com.mgcss.api.dto.request.solicitud.SolicitudCambiarEstadoRequestDto;
 import com.mgcss.api.dto.request.solicitud.SolicitudCreateRequestDto;
 import com.mgcss.api.dto.response.SolicitudResponseDto;
+import com.mgcss.domain.cliente.Cliente;
 import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.domain.tecnico.Tecnico;
+import com.mgcss.service.ClienteService;
 import com.mgcss.service.SolicitudService;
 import com.mgcss.service.TecnicoService;
 
@@ -35,6 +38,7 @@ import lombok.RequiredArgsConstructor;
 public class SolicitudController {
 	private final SolicitudService solicitudService;
 	private final TecnicoService tecnicoService;
+	private final ClienteService clienteService;
 	
 	@Operation(
 		summary = "Crear una nueva solicitud", 
@@ -159,4 +163,26 @@ public class SolicitudController {
 		        return ResponseEntity.notFound().build();
 		    }
 		}
+		
+		@Operation(
+				summary = "Asignar un cliente a la solicitud", 
+				description = "Vincula un cliente existente a una solicitud."
+			)
+			@ApiResponse(responseCode = "200", description = "Cliente asignado correctamente")
+			@ApiResponse(responseCode = "400", description = "El cliente proporcionado no existe o no es válido")
+			@PutMapping("/{id}/clientes")
+			public ResponseEntity<Void> asignarCliente(
+					@PathVariable Long id,
+					@RequestBody SolicitudAsignarClienteRequestDto request) {
+				
+				Cliente cliente = this.clienteService.obtenerCliente(request.clienteId());
+				
+				if (cliente == null) {
+					return ResponseEntity.badRequest().build();
+				}
+				
+				this.solicitudService.asiganrCliente(id, cliente);
+				
+				return ResponseEntity.ok().build();
+			}
 }

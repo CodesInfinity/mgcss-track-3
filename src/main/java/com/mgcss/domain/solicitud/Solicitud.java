@@ -60,6 +60,12 @@ public class Solicitud {
             setEstado(Estado.EN_PROCESO); // El setter se encarga del histórico
         }
     }
+    
+    public void asignarCliente(Cliente cliente) {
+    	if (cliente != null) {
+    		this.cliente = cliente;
+    	}
+    }
 
     // --- Getters y Setters ---
 
