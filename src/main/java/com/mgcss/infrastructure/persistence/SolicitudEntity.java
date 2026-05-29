@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.mgcss.domain.enums.Estado;
+import com.mgcss.domain.enums.Prioridad;
 import com.mgcss.domain.solicitud.Solicitud;
 
 @Entity
@@ -40,6 +41,9 @@ public class SolicitudEntity {
 
     @OneToMany(mappedBy = "solicitud", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<EstadoChangeEntity> historico = new ArrayList<>();
+    
+    @Enumerated(EnumType.STRING)
+    private Prioridad prioridad;
 
     // --- Mapeo Hexagonal ---
     public static SolicitudEntity fromDomain(Solicitud solicitud) {
@@ -64,6 +68,8 @@ public class SolicitudEntity {
                 .toList(); // Cambiado de .collect(Collectors.toList())
         }
         
+        entity.setPrioridad(solicitud.getPrioridad());
+        
         return entity;
     }
 
@@ -82,6 +88,8 @@ public class SolicitudEntity {
         if(this.cliente != null) {
         	solicitud.setCliente(this.cliente.toDomain());
         }
+        
+        solicitud.setPrioridad(this.prioridad);
         
         // El historial en el dominio es un record, se reconstruye si el dominio lo permite
         return solicitud;

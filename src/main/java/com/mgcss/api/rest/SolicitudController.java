@@ -181,7 +181,7 @@ public class SolicitudController {
 					return ResponseEntity.badRequest().build();
 				}
 				
-				this.solicitudService.asiganrCliente(id, cliente);
+				this.solicitudService.asignarCliente(id, cliente);
 				
 				return ResponseEntity.ok().build();
 			}

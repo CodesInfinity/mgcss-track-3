@@ -62,7 +62,7 @@ public class SolicitudService {
 		return solicitudRepository.findAll();
 	}
 	
-	public void asiganrCliente(Long solicitudId, Cliente cliente) {
+	public void asignarCliente(Long solicitudId, Cliente cliente) {
 		Solicitud solicitud = solicitudRepository.findById(solicitudId).orElse(null);
 		
 		if(solicitud != null) {

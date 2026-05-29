@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import com.mgcss.domain.cliente.Cliente;
 import com.mgcss.domain.enums.Estado;
+import com.mgcss.domain.enums.Prioridad;
 import com.mgcss.domain.solicitud.Solicitud;
 
 class GetterYSetterSolicitudTest {
@@ -22,11 +23,13 @@ class GetterYSetterSolicitudTest {
         solicitud.setDescripcion("Reparación de PC");
         solicitud.setFechaCreacion(fecha);
         solicitud.setEstado(Estado.ABIERTA);
+        solicitud.setPrioridad(Prioridad.NORMAL);
         
         assertEquals(cliente, solicitud.getCliente());
         assertEquals("Reparación de PC", solicitud.getDescripcion());
         assertEquals(fecha, solicitud.getFechaCreacion());
         assertEquals(Estado.ABIERTA, solicitud.getEstado());
+        assertEquals(Prioridad.NORMAL, solicitud.getPrioridad());
         assertNull(solicitud.getId());
 	}
 

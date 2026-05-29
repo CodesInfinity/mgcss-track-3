@@ -151,7 +151,7 @@ class SiTecnicoValidoGuardaSolicitudActualizadaTest {
 		
 		when(solicitudRepository.findById(id)).thenReturn(Optional.of(solicitudMock));
 		
-		solicitudService.asiganrCliente(id, clienteMock);
+		solicitudService.asignarCliente(id, clienteMock);
 		
 		verify(solicitudRepository, times(1)).findById(id);
 		// No se verifica el save() porque actualmente el método no lo llama
@@ -164,7 +164,7 @@ class SiTecnicoValidoGuardaSolicitudActualizadaTest {
 		
 		when(solicitudRepository.findById(id)).thenReturn(Optional.empty());
 		
-		solicitudService.asiganrCliente(id, clienteMock);
+		solicitudService.asignarCliente(id, clienteMock);
 		
 		verify(solicitudRepository, times(1)).findById(id);
 	}

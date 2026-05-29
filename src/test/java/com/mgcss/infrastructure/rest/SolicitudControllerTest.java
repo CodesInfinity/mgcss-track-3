@@ -1,6 +1,7 @@
 package com.mgcss.infrastructure.rest;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,13 +23,16 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mgcss.api.dto.request.solicitud.SolicitudAsignarClienteRequestDto;
 import com.mgcss.api.dto.request.solicitud.SolicitudAsignarTecnicoRequestDto;
 import com.mgcss.api.dto.request.solicitud.SolicitudCambiarEstadoRequestDto;
 import com.mgcss.api.dto.request.solicitud.SolicitudCreateRequestDto;
 import com.mgcss.api.rest.SolicitudController;
+import com.mgcss.domain.cliente.Cliente;
 import com.mgcss.domain.enums.Estado;
 import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.domain.tecnico.Tecnico;
+import com.mgcss.service.ClienteService;
 import com.mgcss.service.SolicitudService;
 import com.mgcss.service.TecnicoService;
 
@@ -46,6 +50,9 @@ class SolicitudControllerTest {
 
 	@MockitoBean
 	private TecnicoService tecnicoService;
+	
+	@MockitoBean
+	private ClienteService clienteService;
 
 	@Test
 	void crearSolicitudConDatosValidosRetorna200() throws Exception {
@@ -224,5 +231,34 @@ class SolicitudControllerTest {
 	           .andExpect(jsonPath("$.size()").value(1))
 	           .andExpect(jsonPath("$[0].id").value(1L))
 	           .andExpect(jsonPath("$[0].descripcion").value("Mantenimiento programado"));
+	}
+	
+	@Test
+	void asignarClienteConClienteValidoRetorna200() throws Exception {
+		Long idSolicitud = 1L;
+		SolicitudAsignarClienteRequestDto request = new SolicitudAsignarClienteRequestDto(2L);
+		Cliente clienteMock = mock(Cliente.class);
+
+		when(clienteService.obtenerCliente(request.clienteId())).thenReturn(clienteMock);
+
+		mockMvc.perform(put("/api/solicitudes/{id}/clientes", idSolicitud)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(request)))
+				.andExpect(status().isOk());
+
+		verify(solicitudService, times(1)).asignarCliente(idSolicitud, clienteMock);
+	}
+
+	@Test
+	void asignarClienteConClienteInvalidoRetorna400() throws Exception {
+		Long idSolicitud = 1L;
+		SolicitudAsignarClienteRequestDto request = new SolicitudAsignarClienteRequestDto(99L);
+
+		when(clienteService.obtenerCliente(request.clienteId())).thenReturn(null);
+
+		mockMvc.perform(put("/api/solicitudes/{id}/clientes", idSolicitud)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(request)))
+				.andExpect(status().isBadRequest());
 	}
 }
