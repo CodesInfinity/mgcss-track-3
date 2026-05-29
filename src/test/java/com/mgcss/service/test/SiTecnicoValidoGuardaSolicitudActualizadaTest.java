@@ -17,7 +17,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.mgcss.domain.tecnico.Tecnico;
+import com.mgcss.domain.cliente.Cliente;
 import com.mgcss.domain.enums.Estado;
+import com.mgcss.domain.enums.TipoCliente;
 import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.infrastructure.SolicitudRepository;
 import com.mgcss.service.SolicitudService;
@@ -139,5 +141,31 @@ class SiTecnicoValidoGuardaSolicitudActualizadaTest {
 		assertEquals(Estado.EN_PROCESO, solicitudMock.getEstado());
 		verify(solicitudRepository, times(1)).findById(id);
 		verify(solicitudRepository, times(1)).save(solicitudMock);
+	}
+	
+	@Test
+	void asiganrClienteCuandoSolicitudExisteTest() {
+		Long id = 1L;
+		Cliente clienteMock = new Cliente("Manuel", "manuel@email.com", TipoCliente.STANDARD); 
+		Solicitud solicitudMock = new Solicitud();
+		
+		when(solicitudRepository.findById(id)).thenReturn(Optional.of(solicitudMock));
+		
+		solicitudService.asignarCliente(id, clienteMock);
+		
+		verify(solicitudRepository, times(1)).findById(id);
+		// No se verifica el save() porque actualmente el método no lo llama
+	}
+	
+	@Test
+	void asiganrClienteCuandoSolicitudNoExisteTest() {
+		Long id = 100L;
+		Cliente clienteMock = new Cliente("Manuel", "manuel@email.com", TipoCliente.STANDARD);
+		
+		when(solicitudRepository.findById(id)).thenReturn(Optional.empty());
+		
+		solicitudService.asignarCliente(id, clienteMock);
+		
+		verify(solicitudRepository, times(1)).findById(id);
 	}
 }

@@ -3,6 +3,9 @@ package com.mgcss.service.test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -46,4 +49,30 @@ class ClienteServiceTest {
         verify(clienteRepository, times(1)).save(any(Cliente.class));
     }
 
+    
+    @Test
+	void obtenerClienteCuandoExisteTest() {
+		Long id = 1L;
+		Cliente clienteMock = new Cliente("Empresa", "contacto@gmail.com", TipoCliente.STANDARD);
+		
+		when(clienteRepository.find(id)).thenReturn(Optional.of(clienteMock));
+		
+		Cliente resultado = clienteService.obtenerCliente(id);
+		
+		assertNotNull(resultado);
+		assertEquals(clienteMock, resultado);
+		verify(clienteRepository, times(1)).find(id);
+	}
+
+	@Test
+	void obtenerClienteCuandoNoExisteTest() {
+		Long id = 100L;
+		
+		when(clienteRepository.find(id)).thenReturn(Optional.empty());
+		
+		Cliente resultado = clienteService.obtenerCliente(id);
+		
+		assertNull(resultado);
+		verify(clienteRepository, times(1)).find(id);
+	}
 }

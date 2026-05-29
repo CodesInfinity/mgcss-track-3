@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.mgcss.domain.enums.Estado;
+import com.mgcss.domain.enums.Prioridad;
 import com.mgcss.domain.solicitud.Solicitud;
 import com.mgcss.domain.solicitud.Solicitud.EstadoChange;
 
@@ -18,7 +19,8 @@ public record SolicitudResponseDto (
 		Date fechaCreacion,
 		Date fechaCierre,
 		Estado estado,
-		List<EstadoChange> historico
+		List<EstadoChange> historico,
+		Prioridad prioridad
 		){
 	
 	public static SolicitudResponseDto mapearASolicitudResponse(Solicitud solicitud) {
@@ -35,6 +37,7 @@ public record SolicitudResponseDto (
 	            .fechaCierre(solicitud.getFechaCierre())
 	            .estado(solicitud.getEstado())
 	            .historico(solicitud.getHistorico())
+	            .prioridad(solicitud.getPrioridad())
 	            .build();
 	}
 }

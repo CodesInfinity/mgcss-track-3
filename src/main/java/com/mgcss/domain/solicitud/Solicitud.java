@@ -7,10 +7,13 @@ import java.util.List;
 
 import com.mgcss.domain.tecnico.Tecnico;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.mgcss.domain.cliente.Cliente;
 import com.mgcss.domain.enums.Estado;
+import com.mgcss.domain.enums.Prioridad;
+import com.mgcss.domain.enums.TipoCliente;
 
 @NoArgsConstructor
 public class Solicitud {
@@ -22,6 +25,7 @@ public class Solicitud {
     private Tecnico tecnico;
     private Date fechaCierre;
     private List<EstadoChange> historico = new ArrayList<>();
+    private Prioridad prioridad;
     
     public record EstadoChange(Estado estado, Date fecha) {}
     
@@ -60,6 +64,20 @@ public class Solicitud {
             setEstado(Estado.EN_PROCESO); // El setter se encarga del histórico
         }
     }
+    
+    public void asignarCliente(Cliente cliente) {
+    	if (cliente != null) {
+    		this.cliente = cliente;
+    		
+    		if(cliente.getTipo() == TipoCliente.PREMIUM) {
+        		this.prioridad = Prioridad.PRIORITARIO;
+        	}else {
+        		this.prioridad = Prioridad.NORMAL;
+        	}
+    	}
+    	
+    	
+    }
 
     // --- Getters y Setters ---
 
@@ -95,4 +113,9 @@ public class Solicitud {
 
     public Date getFechaCierre() { return fechaCierre; }
     public void setFechaCierre(Date fechaCierre) { this.fechaCierre = fechaCierre; }
+    
+    public Prioridad getPrioridad() {return this.prioridad; }
+    public void setPrioridad(Prioridad prioridad) {
+    	this.prioridad = prioridad;
+    }
 }
