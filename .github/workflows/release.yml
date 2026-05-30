@@ -1,0 +1,52 @@
+name: Release Pipeline
+
+on:
+  push:
+    tags:
+      - 'v*' # Se dispara ante cualquier tag que empiece por v
+
+permissions:
+  contents: write # Permiso obligatorio para que el flujo pueda crear la release y subir assets
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout del código fuente
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Necesario para un análisis de SonarCloud preciso
+
+    # 2. Configuración del entorno de ejecución (Java 17)
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven'
+
+    # FASE 5: Control de calidad estricto (Quality Gate) antes de proceder
+    - name: Build, Test and Analyze with SonarCloud
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: >
+        mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        -Dsonar.projectKey=CodesInfinity_mgcss-track-3
+        -Dsonar.organization=codesinfinity
+        -Dsonar.host.url=https://sonarcloud.io
+
+    # FASE 3: Construcción de la imagen Docker etiquetada con la versión del tag
+    - name: Build Docker Image
+      run: |
+        docker build -t mgcss-track:${{ github.ref_name }} .
+
+    # FASE 3 y 4: Publicación automática de la Release en GitHub adjuntando el .jar como Asset
+    - name: Create GitHub Release and Upload Assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: target/*.jar # Adjunta el archivo empaquetado automáticamente
+        generate_release_notes: true # Genera los cambios de la versión de forma automática
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
